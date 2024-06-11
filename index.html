@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Notas Finales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            max-width: 75%;
+            margin: auto;
+        }
+        .inputs, .results {
+            flex: 1;
+            margin-right: 30px;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .result, .notas {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .inputs input, .inputs button, .results input, .results button {
+            min-width: 200px; 
+        }
+        .container {
+            gap: 30px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inputs">
+            <h1>Calculadora de Notas Finales</h1>
+            <label for="nota">Ingrese la nota del alumno:</label>
+            <input type="number" id="nota" placeholder="Ingrese la nota del alumno">
+
+            <button id="agregarNotaButton">Agregar Nota</button>
+            <button id="calcularPromedioButton">Calcular Promedio</button>
+            <button id="limpiarButton">Limpiar Notas</button>
+
+            <div class="result" id="result">
+            </div>
+        </div>
+        <div class="results">
+            <h2>Notas Ingresadas</h2>
+            <ul class="notas" id="notasList">
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="inputs">
+            <h2>Calculadora</h2>
+            <label for="num1">Número 1:</label>
+            <input type="number" id="num1" placeholder="Número 1">
+            <label for="num2">Número 2:</label>
+            <input type="number" id="num2" placeholder="Número 2">
+            <button id="sumarButton">Sumar</button>
+            <button id="restarButton">Restar</button>
+            <button id="multiplicarButton">Multiplicar</button>
+            <button id="dividirButton">Dividir</button>
+            <div class="result" id="resultOperaciones">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="inputs">
+        <h2>Agregar Alumno</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" placeholder="Apellido">
+        <label for="notas">Notas (separadas por coma):</label>
+        <input type="text" id="notas" placeholder="Notas">
+        <button id="agregarAlumnoButton">Agregar Alumno</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="inputs">
+        <h2>Buscar Alumno</h2>
+        <label for="buscar">Buscar por nombre o apellido:</label>
+        <input type="text" id="buscar" placeholder="Buscar">
+        <button id="buscarAlumnoButton">Buscar</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="results">
+        <h2>Lista de Alumnos</h2>
+        <ul id="listaAlumnos">
+        </ul>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
