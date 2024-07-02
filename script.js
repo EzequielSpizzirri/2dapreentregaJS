@@ -1,3 +1,16 @@
+// Al cargar la página, recuperar los datos del Storage
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('notas')) {
+        notas = JSON.parse(localStorage.getItem('notas'));
+        actualizarListaNotas();
+    }
+
+    if (localStorage.getItem('listaAlumnos')) {
+        listaAlumnos = JSON.parse(localStorage.getItem('listaAlumnos'));
+        mostrarListaAlumnos();
+    }
+});
+
 // Array para almacenar las notas de los alumnos
 let notas = [];
 
@@ -10,6 +23,7 @@ function agregarNota() {
         alert('Por favor, ingrese una nota válida (entre 0 y 10).');
     } else {
         notas.push(nota);
+        localStorage.setItem('notas', JSON.stringify(notas)); // Guardar en localStorage
         console.log(`Nota ${nota} agregada.`);
         notaInput.value = ''; // Limpiar el campo de entrada
         actualizarListaNotas();
@@ -30,29 +44,6 @@ function calcularPromedio() {
     mostrarResultado(`El promedio de las notas es: ${promedio.toFixed(2)}`);
 }
 
-// Función para sumar dos números
-function suma(a, b) {
-    return a + b;
-}
-
-// Función para restar dos números
-function resta(a, b) {
-    return a - b;
-}
-
-// Función para multiplicar dos números
-function multiplicacion(a, b) {
-    return a * b;
-}
-
-// Función para dividir dos números
-function division(a, b) {
-    if (b === 0) {
-        return "Error: división por cero";
-    }
-    return a / b;
-}
-
 // Función para mostrar el resultado en el HTML
 function mostrarResultado(mensaje) {
     const resultDiv = document.getElementById('result');
@@ -69,17 +60,39 @@ function actualizarListaNotas() {
         notasList.appendChild(li);
     }
 }
-function mostrarOperaciones(mensaje) {
-    const resultDiv = document.getElementById('resultOperaciones');
-    resultDiv.innerText = mensaje;
-}
 
 // Función para limpiar el array de notas y el mensaje de resultado
 function limpiarNotas() {
     notas = [];
+    localStorage.removeItem('notas'); // Eliminar del localStorage
     mostrarResultado('');
     actualizarListaNotas();
     console.log('Notas y resultado limpiados.');
+}
+
+// Funciones de operaciones matemáticas
+function suma(a, b) {
+    return a + b;
+}
+
+function resta(a, b) {
+    return a - b;
+}
+
+function multiplicacion(a, b) {
+    return a * b;
+}
+
+function division(a, b) {
+    if (b === 0) {
+        return "Error: división por cero";
+    }
+    return a / b;
+}
+
+function mostrarOperaciones(mensaje) {
+    const resultDiv = document.getElementById('resultOperaciones');
+    resultDiv.innerText = mensaje;
 }
 
 // Event listeners para los botones
@@ -87,7 +100,6 @@ document.getElementById('agregarNotaButton').addEventListener('click', agregarNo
 document.getElementById('calcularPromedioButton').addEventListener('click', calcularPromedio);
 document.getElementById('limpiarButton').addEventListener('click', limpiarNotas);
 
-// Event listeners para los botones de las operaciones
 document.getElementById('sumarButton').addEventListener('click', function() {
     const num1 = parseFloat(document.getElementById('num1').value);
     const num2 = parseFloat(document.getElementById('num2').value);
@@ -112,6 +124,7 @@ document.getElementById('dividirButton').addEventListener('click', function() {
     mostrarOperaciones(division(num1, num2));
 });
 
+// Constructor para Alumno
 function Alumno(nombre, apellido, notas) {
     this.nombre = nombre;
     this.apellido = apellido;
@@ -124,6 +137,7 @@ function Alumno(nombre, apellido, notas) {
         return suma / this.notas.length;
     };
 }
+
 // Lista de alumnos
 let listaAlumnos = [];
 
@@ -139,6 +153,7 @@ function agregarAlumno() {
 
     const alumno = new Alumno(nombre, apellido, notas);
     listaAlumnos.push(alumno);
+    localStorage.setItem('listaAlumnos', JSON.stringify(listaAlumnos)); // Guardar en localStorage
 
     console.log(`Alumno ${nombre} ${apellido} agregado.`);
     mostrarListaAlumnos();
